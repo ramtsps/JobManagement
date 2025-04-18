@@ -1,0 +1,180 @@
+{% extends 'base.html' %} {% block extra_head %}
+<!-- Bootstrap Icons -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+/>
+{% endblock %} {% block content %}
+
+<!-- Filter Bar -->
+<div style="width: 90%; margin: 30px auto">
+  <div style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center">
+    <!-- Search -->
+    <div style="flex: 1 1 22%">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        "
+      >
+        <span style="padding: 6px"><i class="bi bi-search"></i></span>
+        <input
+          type="text"
+          placeholder="Search By Job Title, Role"
+          style="border: none; outline: none; flex-grow: 1; padding: 6px"
+        />
+      </div>
+    </div>
+
+    <!-- Location -->
+    <div style="flex: 1 1 22%">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        "
+      >
+        <span style="padding: 6px"><i class="bi bi-geo-alt"></i></span>
+        <input
+          type="text"
+          placeholder="Preferred Location"
+          style="border: none; outline: none; flex-grow: 1; padding: 6px"
+        />
+      </div>
+    </div>
+
+    <!-- Job Type -->
+    <div style="flex: 1 1 18%">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        "
+      >
+        <span style="padding: 6px"><i class="bi bi-person-fill"></i></span>
+        <select style="border: none; outline: none; flex-grow: 1; padding: 6px">
+          <option selected>Job type</option>
+          <option>Full-time</option>
+          <option>Part-time</option>
+          <option>Remote</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Salary Range -->
+    <div style="flex: 1 1 30%; display: flex; align-items: center">
+      <label style="margin-right: 8px">Salary:</label>
+      <input
+        type="range"
+        min="50000"
+        max="80000"
+        step="5000"
+        style="flex-grow: 1; margin-right: 8px"
+      />
+      <span>₹50k - ₹80k</span>
+    </div>
+  </div>
+</div>
+
+<!-- Job Cards -->
+<div style="width: 90%; margin: 0 auto 50px">
+  <div style="display: flex; flex-wrap: wrap; gap: 20px">
+    {% for job in jobs %}
+    <div style="flex: 1 1 calc(25% - 20px); min-width: 250px">
+      <div
+        style="
+        background-color: white;
+          position: relative;
+          border: 1px solid #ddd;
+          padding: 16px;
+          border-radius: 30px
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          
+        "
+      >
+        <!-- Posted Badge -->
+        <span
+          style="
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: #28a745;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+          "
+          >{{ job.posted }}</span
+        >
+
+        <!-- Company Logo -->
+        <div style="text-align: center; margin-bottom: 12px">
+          <img
+            src="{{ job.logo_url }}"
+            alt="{{ job.company }}"
+            style="max-height: 60px; object-fit: contain"
+          />
+        </div>
+
+        <!-- Job Title -->
+        <h5 style="text-align: center; color: #007bff; margin: 10px 0">
+          {{ job.title }}
+        </h5>
+
+        <!-- Meta Info -->
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            font-size: 14px;
+            color: #555;
+          "
+        >
+          <span><i class="bi bi-person-fill"></i> {{ job.exp }}</span>
+          <span><i class="bi bi-building"></i> {{ job.type }}</span>
+          <span><i class="bi bi-cash-coin"></i> {{ job.salary }}</span>
+        </div>
+
+        <!-- Job Description -->
+        <ul style="font-size: 14px; padding-left: 20px; color: #444">
+          <li>{{ job.description1 }}</li>
+          <li>{{ job.description2 }}</li>
+        </ul>
+
+        <!-- Apply Button -->
+        <a
+          href="#"
+          style="
+            margin-top: auto;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px;
+            margin-left: 30px;
+            text-align: center;
+            display: block;
+            width: 80%;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+          "
+          >Apply Now</a
+        >
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
